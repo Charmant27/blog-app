@@ -13,7 +13,7 @@ const Nav = () => {
                 <Link href="/">
                     <Image src="/assets/images/logo.svg" width={30} height={30} alt="charm-blog" />
                 </Link>
-                <p className="text-sm">Charm blogging</p>
+                <p className="text-sm uppercase font-extrabold">Charm blogging</p>
             </div>
 
             <div className="flex items-center gap-10">
