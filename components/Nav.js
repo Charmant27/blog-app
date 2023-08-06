@@ -2,11 +2,24 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut, getProviders } from "next-auth/react"
+import { useState, useEffect } from "react"
 
 const Nav = () => {
-    // const {data: session} = useSession()
-    const isUserLoggedIn = false
+    const {data: session} = useSession()
+
+    const [providers, setProviders] = useState(null)
+
+    useEffect(() => {
+        const setProvider = async () => {
+            const response = await getProviders()
+
+            setProviders(response)
+        }
+
+        setProvider()
+    }, [])
+
     return (
         <nav className="w-full h-20 flex-between border-b-2">
             <div className="flex items-center gap-3">
@@ -22,14 +35,42 @@ const Nav = () => {
                 <Link href="/about">About us</Link>
             </div>
             <div>
-                {isUserLoggedIn ?
-                    <button>Sign out</button>
-                    :
-                    <button className="btn" onClick={signOut}>Sign in</button>
-                }
+                {session?.user ? (
+                    <div className="flex items-center gap-3">
+                        <Link href="/create-blog" className="btn">
+                            Create a blog
+                        </Link>
+                        <button
+                            type="button"
+                            onClick={signOut}
+                            className="btn"
+                        >
+                            sign out
+                        </button>
+                        <Image
+                            src={session?.user.image}
+                            width={40}
+                            height={40}
+                            className="rounded-full"
+                            alt="profile"
+                        />
+                    </div>
+                ) : (
+                    <>
+                        {providers && Object.values(providers).map((provider) => (
+                            <button
+                                type="button"
+                                key={provider.name}
+                                onClick={() => signIn(provider.id)}
+                                className="btn"
+                            >
+                                Sign in
+                            </button>
+                        ))}
+                    </>
+                )}
             </div>
         </nav>
-
     )
 }
 
