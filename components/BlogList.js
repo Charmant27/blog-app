@@ -2,12 +2,15 @@
 import Image from "next/image"
 
 const BlogList = ({ blog }) => {
-    console.log(blog.image)
+
     return (
         <section className="w-full">
             <div>
-                <div>
-                    <div>
+                <div
+                    className="mb-10 bg-slate-200 px-3 py-4 flex flex-col gap-2"
+                >
+                    <div
+                        className="flex items-center gap-3">
                         <Image
                             src={blog.author.image}
                             alt="author"
@@ -15,15 +18,12 @@ const BlogList = ({ blog }) => {
                             height={40}
                             className="rounded-full"
                         />
+                        <h1 className="text-gray-700">{blog.author.email}</h1>
                     </div>
-                    {/* <Image
-                    src={blog.image}
-                    width={90}
-                    height={100}
-                    alt={blog.title}
-                     /> */}
-                    <h1>{blog.author.email}</h1>
-                    <h2>{blog.title}</h2>
+                    <div className="flex flex-col gap-2">
+                        <h2 className="font-bold text-gradient">{blog.title}</h2>
+                        <p className="text-sm">{blog.description}</p>
+                    </div>
                 </div>
             </div>
         </section>
