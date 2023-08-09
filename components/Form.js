@@ -39,7 +39,7 @@ const Form = ({ type, blogPost, setBlogPost, uploading, handleSubmit, imageFile 
         <input
           type='file'
           accept='image/*'
-          value={imageFile}
+          value={blogPost.image}
           onChange={(e) => setBlogPost({ ...blogPost, image: e.target.value })}
           className='w-full border rounded-md px-6 py-3 bg-white mb-5'
         />
