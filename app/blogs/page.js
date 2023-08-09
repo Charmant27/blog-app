@@ -22,6 +22,7 @@ const Blogs = () => {
   const [searchFilter, setSearchFilter] = useState('')
   const [blogs, setBlogs] = useState([])
 
+
   useEffect(() => {
     const fetchBlogs = async () => {
       const response = await fetch('/api/blog')
