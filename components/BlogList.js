@@ -1,5 +1,6 @@
 
 import Image from "next/image"
+import Link from "next/link"
 
 const BlogList = ({ blog }) => {
 
@@ -24,6 +25,12 @@ const BlogList = ({ blog }) => {
                         <h2 className="font-bold text-gradient">{blog.title}</h2>
                         <p className="text-sm">{blog.description}</p>
                     </div>
+                    <Link 
+                    href={`/single-blog/${blog._id}`}
+                    className="text-orange-500 text-base"
+                    >
+                        View More
+                    </Link>
                 </div>
             </div>
         </section>
